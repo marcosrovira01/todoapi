@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.marcthegamer.todoapi.mapper.TaskInDTOToTask;
 import com.marcthegamer.todoapi.persistence.entity.Task;
+import com.marcthegamer.todoapi.persistence.entity.TaskStatus;
 import com.marcthegamer.todoapi.persistence.repository.TaskRepository;
 import com.marcthegamer.todoapi.service.dto.TaskInDTO;
 
@@ -25,6 +26,10 @@ public class TaskService {
 	
 	public List<Task> findAll(){
 		return this.repository.findAll();
+	}
+	
+	public List<Task> findAllByTaskStatus(TaskStatus taskStatus){
+		return this.repository.findAllByTaskStatus(taskStatus);
 	}
 
 }

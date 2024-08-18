@@ -2,11 +2,13 @@ package com.marcthegamer.todoapi.controller;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.marcthegamer.todoapi.persistence.entity.Task;
+import com.marcthegamer.todoapi.persistence.entity.TaskStatus;
 import com.marcthegamer.todoapi.service.TaskService;
 import com.marcthegamer.todoapi.service.dto.TaskInDTO;
 
@@ -28,6 +30,11 @@ public class TaskController {
 	@GetMapping
 	public List<Task> findAll(){
 		return this.taskService.findAll();
+	}
+	
+	@GetMapping("/status/{status}")
+	public List<Task> findAllByTaskStatus(@PathVariable("status") TaskStatus status){
+		return this.taskService.findAllByTaskStatus(status);
 	}
 	
 }

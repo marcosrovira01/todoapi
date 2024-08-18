@@ -1,5 +1,6 @@
 package com.marcthegamer.todoapi.service;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
 import com.marcthegamer.todoapi.mapper.TaskInDTOToTask;
 import com.marcthegamer.todoapi.persistence.entity.Task;
@@ -20,6 +21,10 @@ public class TaskService {
 	public Task createTask(TaskInDTO taskInDTO) {
 		Task task = mapper.map(taskInDTO);
 		return this.repository.save(task);
+	}
+	
+	public List<Task> findAll(){
+		return this.repository.findAll();
 	}
 
 }

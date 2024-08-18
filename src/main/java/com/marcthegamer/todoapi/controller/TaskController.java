@@ -37,4 +37,9 @@ public class TaskController {
 		return this.taskService.findAllByTaskStatus(status);
 	}
 	
+	@PostMapping("/mark_as_finished/{id}")
+	public void markTaskAsFinished(@PathVariable("id") Long id) {
+		this.taskService.markTaskAsFinished(id);
+	}
+	
 }

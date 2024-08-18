@@ -42,4 +42,9 @@ public class TaskController {
 		this.taskService.markTaskAsFinished(id);
 	}
 	
+	@PostMapping("/delete_task/{id}")
+	public void deleteTaskById(@PathVariable("id") Long id) {
+		this.taskService.deleteTaskById(id);
+	}
+	
 }

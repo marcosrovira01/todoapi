@@ -2,7 +2,11 @@ package com.marcthegamer.todoapi.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import com.marcthegamer.todoapi.exceptions.ToDoExceptions;
 import com.marcthegamer.todoapi.mapper.TaskInDTOToTask;
 import com.marcthegamer.todoapi.persistence.entity.Task;
 import com.marcthegamer.todoapi.persistence.entity.TaskStatus;
@@ -36,11 +40,20 @@ public class TaskService {
 	public void markTaskAsFinished(Long id) {
 		Optional<Task> optionalTask = this.repository.findById(id);
 		if (optionalTask.isEmpty()) {
-			throw new NullPointerException("The task object that you've looked for is empty");
+			throw new ToDoExceptions("The task object that you've looked for is empty", HttpStatus.NOT_FOUND);
 		}else {
 			Task task = optionalTask.get();
 			task.setFinished(true);
 			this.repository.save(task);
+		}
+	}
+	
+	public void deleteTaskById(Long id) {
+		Optional<Task> optionalTask = this.repository.findById(id);
+		if (optionalTask.isEmpty()) {
+			throw new ToDoExceptions("The task object that you've looked for is empty", HttpStatus.NOT_FOUND);
+		}else {
+			this.repository.deleteById(id);;
 		}
 	}
 

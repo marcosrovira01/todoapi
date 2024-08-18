@@ -1,6 +1,7 @@
 package com.marcthegamer.todoapi.service;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.marcthegamer.todoapi.mapper.TaskInDTOToTask;
 import com.marcthegamer.todoapi.persistence.entity.Task;
@@ -30,6 +31,17 @@ public class TaskService {
 	
 	public List<Task> findAllByTaskStatus(TaskStatus taskStatus){
 		return this.repository.findAllByTaskStatus(taskStatus);
+	}
+	
+	public void markTaskAsFinished(Long id) {
+		Optional<Task> optionalTask = this.repository.findById(id);
+		if (optionalTask.isEmpty()) {
+			throw new NullPointerException("The task object that you've looked for is empty");
+		}else {
+			Task task = optionalTask.get();
+			task.setFinished(true);
+			this.repository.save(task);
+		}
 	}
 
 }
